@@ -9,11 +9,5 @@ const mapStateToProps = state => {
   }
 }
 
-// 登录确定
-const mapDispatchToProps = dispatch => {
-  return {
-    login: () => dispatch({type:'login'})
-  }
-}
-const Managed =  connect(mapStateToProps, mapDispatchToProps)(Manage)
+const Managed =  connect(mapStateToProps)(Manage)
 export default withRouter(Managed)

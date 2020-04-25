@@ -3,11 +3,12 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
+  post: '3036',
   password: "zs123456",
   database: 'mydb'
 });
 
-con.connect(function (err) {
+con.connect((err) => {
   if (err) throw err;
   console.log("***** + Connected! + *****");
 
@@ -19,7 +20,7 @@ con.connect(function (err) {
 
   // 创建表加主键
   // let sql = 'CREATE TABLE comments (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), address VARCHAR(255) )';
-
+  
   // 向表中插入数据
   // let sql = "INSERT INTO customers (name, address) VALUES ('Company Inc', 'Highway 37')"
 
