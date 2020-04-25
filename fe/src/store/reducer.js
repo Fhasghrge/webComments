@@ -8,7 +8,7 @@ const initData = {
   //测试版本
   // login: true,
   //上线版本
-  login:false,
+  login:true,
   contents: [
     '个人中心',
     '前端',

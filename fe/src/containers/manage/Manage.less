@@ -19,18 +19,41 @@ html {
       text-decoration: none;
       line-height: 4rem;
       border-radius: 2rem;
-      margin: 2rem .5rem;
-      background-color: #82ccdd;
+      margin: 2rem .9rem;
+      background-color: rgb(151, 208, 255);
       color: white;
       font-weight: bold;
-      font-size: 1.6rem;
+      font-size: 1.2rem;
+      letter-spacing: .2rem;
     }
     a:hover {
       box-shadow: 2px 2px 12px white;
+      background-color: rgb(112, 188, 250);
+      // font-size: 1.5rem;
+      // letter-spacing: .6rem;
+      animation: hover_btn 5s;
+    }
+    @keyframes hover_btn {
+      0% {
+        font-size: 1.2rem;
+        letter-spacing: .2rem;
+      }
+      2%{
+        font-size: 1.6rem;
+        letter-spacing: .9rem;
+      }
+      95%{
+        font-size: 1.6rem;
+        letter-spacing: .9rem;
+      }
+      99%{
+        font-size: 1.2rem;
+        letter-spacing: .2rem;
+      }
     }
   }
   main {
-    background-color: skyblue;
+    background-color: rgb(237, 240, 241);
     flex: 4;
     height: 100vh;
   }

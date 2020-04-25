@@ -21,11 +21,8 @@ app.post('/userinfos', bodyParser.json(), async (req, res) => {
     let strSql = `SELECT * FROM userinfos WHERE username = ${username} AND password = ${password} LIMIT 1`
     let result = await sqlQuery(strSql)
     // res.json()
-    console.log(result)
     res.json(Array.from(result))
   }else{
-    console.log(JSON.stringify(req.body))
-    console.log(typeof req.body)
     console.log('未能获得参数')
   }
 })
