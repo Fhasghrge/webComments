@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Upload, Button, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import './self.css';
+import './self.scss';
 const { Option } = Select;
 export default class Self extends React.Component {
   // eslint-disable-next-line no-useless-constructor

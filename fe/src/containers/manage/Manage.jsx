@@ -6,7 +6,7 @@ import Be from '../../component/be/Be';
 import Alg from '../../component/alg/Alg';
 import Others from '../../component/others/Others';
 import Autor from '../../component/Autor/Autor';
-import './Manage.css';
+import './Manage.scss';
 
 export default class Manage extends React.Component {
   // eslint-disable-next-line no-useless-constructor

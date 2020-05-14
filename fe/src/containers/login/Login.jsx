@@ -1,9 +1,8 @@
 import React from 'react';
-// import './login.css';
 import axios from 'axios'
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import './login.css';
+import './login.scss';
 export default class Login extends React.Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {

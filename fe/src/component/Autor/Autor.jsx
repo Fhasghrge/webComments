@@ -1,6 +1,6 @@
 import React from 'react'
 import head_img from '../../assets/image/avatar.jpg'
-import './autor.css'
+import './autor.scss'
 export default class Autor extends React.Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
