@@ -1,95 +1,94 @@
 import React from 'react';
-import { Input, Upload, Button, Select } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { connect } from 'react-redux';
+import { Input, Button, Select } from 'antd';
+import axios from 'axios';
 import './self.scss';
 const { Option } = Select;
-export default class Self extends React.Component {
+const { TextArea } = Input;
+class Self extends React.Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
+      type: '',
+      cnt: '',
     };
   }
   enterLoading = () => {
     this.setState({ loading: true });
+    let formdata = new FormData();
+    formdata.set('content', this.state.cnt)
+    formdata.set('author', this.props.name)
+    formdata.set('type', this.state.type)
+    axios({
+      method:'post',
+      url:'/addArticles',
+      data: formdata,
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
+      .then(res => {
+        if(res.data.errcode === 0) {
+          alert('提交成功！')
+        }else {
+          alert('提交失败')
+        }
+      })
     setTimeout(() => {
       this.setState({ loading: false });
-    }, 8000);
+    }, 2000);
+  };
+  handleInputText = (e) => {
+    this.setState({
+      cnt: e.target.value,
+    });
   };
   handleChange = (value) => {
-    console.log(`selected ${value}`);
+    this.setState({
+      type: value,
+    });
   };
   render() {
-    let props = {
-      action: '//jsonplaceholder.typicode.com/posts/',
-      listType: 'picture',
-      previewFile(file) {
-        console.log('Your upload file:', file);
-        // Your process logic. Here we just mock to the same file
-        return fetch('https://next.json-generator.com/api/json/get/4ytyBoLK8', {
-          method: 'POST',
-          body: file,
-        })
-          .then((res) => res.json())
-          .then(({ thumbnail }) => thumbnail);
-      },
-    };
     return (
       <div className="self">
-        <Input
-          className="write-title"
-          size="large"
-          placeholder="请输入文章标题"
-          name="title"
-        ></Input>
+        <TextArea onChange={this.handleInputText} rows={10}></TextArea>
         <div id="write-up">
           <Select
-            mode="multiple"
             style={{ width: '30%' }}
             placeholder="select one country"
-            defaultValue={['前端']}
+            defaultValue={['FE']}
             onChange={this.handleChange}
             optionLabelProp="label"
           >
-            <Option value="前端" label="前端">
+            <Option value="fe" label="FE">
               <div className="demo-option-label-item">
-                <span role="img" aria-label="前端">
+                <span role="img" aria-label="fe">
                   FE
                 </span>
-                前端
               </div>
             </Option>
-            <Option value="后端" label="后端">
+            <Option value="be" label="BE">
               <div className="demo-option-label-item">
-                <span role="img" aria-label="后端">
+                <span role="img" aria-label="be">
                   BE
                 </span>
-                后端
               </div>
             </Option>
-            <Option value="算法" label="算法">
+            <Option value="alg" ALG label="ALG">
               <div className="demo-option-label-item">
-                <span role="img" aria-label="算法">
+                <span role="img" aria-label="alg">
                   ALG
                 </span>
-                算法
               </div>
             </Option>
-            <Option value="其他" label="其他">
+            <Option value="others" label="OTHERS">
               <div className="demo-option-label-item">
-                <span role="img" aria-label="其他">
-                  OTH
+                <span role="img" aria-label="others">
+                  OTHERS
                 </span>
-                其他
               </div>
             </Option>
           </Select>
-          <Upload {...props}>
-            <Button>
-              <UploadOutlined /> Upload  (Must be .md file)
-            </Button>
-          </Upload>
         </div>
         <Button
           type="primary"
@@ -97,9 +96,18 @@ export default class Self extends React.Component {
           onClick={this.enterLoading}
           className="add-btn"
         >
-          上传
+          发表
         </Button>
       </div>
     );
   }
 }
+const mapStateToProps = (state) => ({
+  name: state.name,
+});
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     login: (cont, name) => dispatch(actionLogin(cont, name))
+//   }
+// }
+export default connect(mapStateToProps)(Self);

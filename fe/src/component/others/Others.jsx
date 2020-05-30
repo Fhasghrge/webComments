@@ -1,14 +1,53 @@
-import React from 'react'
-export default class Others extends React.Component {
+import React from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import {Link} from 'react-router-dom'
+import { deepArticle } from '../../store/action';
+import '../../assets/style/articles.scss';
+class others extends React.Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      articles: [],
+    };
+  }
+  componentDidMount() {
+    let formdata = new FormData();
+    formdata.set('author', this.props.name);
+    formdata.set('type', 'others');
+    axios({
+      method: 'POST',
+      url: '/getArticles',
+      data: formdata,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }).then((res) => {
+      this.setState({
+        articles: res.data,
+      });
+    });
   }
   render() {
     return (
       <div className="others">
-        others
+        <ul>
+          {this.state.articles.map((item, index) => (
+            <Link key={item.id} to={'/detail?id='+ item.id }>
+              <span>{index + 1}</span>
+              <p>{item.title}</p>
+            </Link>
+          ))}
+        </ul>
       </div>
-    )
+    );
   }
 }
+const mapStateToProps = (state) => ({
+  name: state.name,
+});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    detailArticle: (articleId) => dispatch(deepArticle(articleId)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(others);

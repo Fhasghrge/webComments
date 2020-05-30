@@ -1,9 +1,12 @@
 import React from 'react';
 import axios from 'axios'
 import { Form, Input, Button, Checkbox } from 'antd';
+import {connect} from 'react-redux';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import {login as actionLogin} from '../../store/action'
+
 import './login.scss';
-export default class Login extends React.Component {
+class Login extends React.Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props);
@@ -15,22 +18,21 @@ export default class Login extends React.Component {
     };
   }
   onFinish = (values) => {
-    console.log('Received values of form: ', values);
-    // let formdata = new FormData();
-        // formdata.append('username',values.username)
-      //  formdata.append('password',values.password)
     axios
         .post('/userinfos',{
           username: values.username,
           password:values.password
         })
         .then(res => {
-          console.log('收到啦！！！');
-          console.log(res);
-          if(res.data.length === 1) {
-            console.log(this);
-            this.props.login()
+          if(res.data.errcode === 0) {
+            const contents = res.data.types.split(',')
+            
+            this.props.login(contents,values.username)
             this.props.history.push('/')
+          }else if(res.data.errcode === 1) {
+            alert('密码或者账户错误')
+          }else{
+            alert('登录失败！')
           }
         })
         .catch(err => {
@@ -77,11 +79,11 @@ export default class Login extends React.Component {
                 message: 'Please input your Password!',
               },
             ]}
-            // help = 'The default password is the last six digits of the student number'
           >
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
+              autoComplete="on"
               placeholder="Password"
             />
           </Form.Item>
@@ -110,3 +112,7 @@ export default class Login extends React.Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+    login: (cont, name) => dispatch(actionLogin(cont, name))
+})
+export default connect(null, mapDispatchToProps)(Login);

@@ -1,0 +1,16 @@
+ul {
+  list-style: none;
+  a {
+    display: block;
+    border: 1px solid rgb(168, 167, 167);
+    text-align: center;
+    margin: 2rem;
+    p{
+      font-size: 1.2rem;
+      color: black;
+    }
+    &:hover {
+      box-shadow: 0 0 3px rgb(117, 113, 113);
+    }
+  }
+}
