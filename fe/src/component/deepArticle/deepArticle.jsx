@@ -139,8 +139,8 @@ class deepArticle extends React.Component {
           <TextArea
             value={this.state.commentValue}
             onChange={this.onChange}
-            placeholder="At most 200 letters"
-            maxLength={200}
+            placeholder="At most 300 letters"
+            maxLength={300}
             autoSize={{ minRows: 1, maxRows: 5 }}
           />
           <div className="btns">
