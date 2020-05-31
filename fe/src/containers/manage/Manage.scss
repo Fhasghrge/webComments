@@ -19,6 +19,7 @@ html {
       font-weight: bold;
     }
     ul {
+      // position: fixed;
       display: flex;
       flex-direction: column;
       list-style: none;
@@ -66,8 +67,13 @@ html {
     }
   }
   main {
-    background-color: rgb(237, 240, 241);
+    // background-color: rgb(237, 240, 241);
     flex: 4;
     height: 100vh;
+  }
+}
+@media (max-width: 640px) {
+  nav {
+    display: none;
   }
 }

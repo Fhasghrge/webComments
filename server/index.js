@@ -58,6 +58,33 @@ app.post('/getDeepArticle', upload.array(), async (req, res) => {
   res.json(Array.from(result))
 })
 
+app.post('/postComment', upload.array(), async (req, res) => {
+  const {author, content, article} = req.body
+  const data = new Date().toLocaleString()
+  const strSql = `INSERT INTO comments (author,content,data,article) VALUES ("${author}","${content}","${data}","${article}")`
+  const result = await sqlQuery(strSql)
+  res.json({
+    errcode: result.warningCount === 0 ? 0 : 1,
+  })
+})
+
+app.post('/getComments', upload.array(), async (req, res) => {
+  const {article} = req.body
+  const strSql = `SELECT * FROM comments WHERE article = "${article}"`
+  const result = await sqlQuery(strSql)
+  res.json(Array.from(result))
+})
+
+app.post('/deleteComments', upload.array(), async (req, res) => {
+  const {id} = req.body
+  const strSql = `DELETE FROM comments WHERE id="${id}"`
+  const result = await sqlQuery(strSql)
+  res.json({
+    errcode: result.warningCount === 0 ? 0 : 1,
+  })
+})
+
+
 app.listen('8080', () => {
   console.log(
     'server Start',
