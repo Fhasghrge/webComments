@@ -1,5 +1,8 @@
 ul {
   list-style: none;
+  max-width: 50rem;
+  min-width: 20rem;
+  margin: 0 auto;
   a {
     display: block;
     border: 1px solid rgb(168, 167, 167);
@@ -10,7 +13,10 @@ ul {
       color: black;
     }
     &:hover {
-      box-shadow: 0 0 3px rgb(117, 113, 113);
+      position: relative;
+      top: -.1rem;
+      box-shadow: 0 0 2px rgb(117, 113, 113);
+      background-color: rgb(234, 243, 253);
     }
   }
 }

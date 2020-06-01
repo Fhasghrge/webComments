@@ -13,6 +13,7 @@ class Self extends React.Component {
       loading: false,
       type: '',
       cnt: '',
+      title: ''
     };
   }
   enterLoading = () => {
@@ -21,6 +22,7 @@ class Self extends React.Component {
     formdata.set('content', this.state.cnt)
     formdata.set('author', this.props.name)
     formdata.set('type', this.state.type)
+    formdata.set('title', this.state.title)
     axios({
       method:'post',
       url:'/addArticles',
@@ -48,15 +50,20 @@ class Self extends React.Component {
       type: value,
     });
   };
+  inputTitle = e => {
+    this.setState({
+      title: e.target.value
+    })
+  }
   render() {
     return (
       <div className="self">
-        <TextArea onChange={this.handleInputText} rows={10}></TextArea>
+        <input type="text" name="title" id="title" placeholder='TITLE' onChange={this.inputTitle}/>
+        <TextArea onChange={this.handleInputText} placeholder='CONTENT' rows={10}></TextArea>
         <div id="write-up">
           <Select
             style={{ width: '30%' }}
-            placeholder="select one country"
-            defaultValue={['FE']}
+            placeholder="select one type"
             onChange={this.handleChange}
             optionLabelProp="label"
           >

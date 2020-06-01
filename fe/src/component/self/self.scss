@@ -1,5 +1,19 @@
 .self {
   padding: 5rem;
+  input {
+    border: none;
+    border-bottom: 1px solid #DDD;
+    max-width: 60rem;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    &::before{
+      content: 'TITLE';
+    }
+    &::placeholder {
+      color: rgb(192, 192, 192);
+      text-indent: 1rem;
+    }
+  }
   .write-title {
     height: 4rem;
   }

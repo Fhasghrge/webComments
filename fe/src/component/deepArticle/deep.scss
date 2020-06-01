@@ -15,7 +15,8 @@
       color: black;
     }
     .actions {
-      display:  flex;
+      display: flex;
+      margin: 3rem auto;
       justify-content: space-around;
       .comment {
         img {
@@ -26,35 +27,39 @@
       .showComments {
         button {
           border: none;
-          padding: .2rem 1rem;
-          border-radius: .3rem;
-
+          padding: 0.2rem 1rem;
+          border-radius: 0.3rem;
           background-color: skyblue;
         }
       }
     }
   }
-  .hide {
-    display: none;
-  }
   .commentInput {
-    margin: 1rem 3rem;
+    // margin: 1rem 3rem;
+    max-width: 30rem;
+    margin: 0 auto;
+    .title {
+      font-size: 2rem;
+      letter-spacing: 1rem;
+      color: black;
+      padding-bottom: 1rem;
+    }
     .btns {
-      display:  flex;
+      display: flex;
       justify-content: center;
       margin: 1rem 0;
       button {
         color: white;
         box-sizing: border-box;
-        padding: .3rem 5rem;
-        border-radius: .7rem;
+        padding: 0.3rem 5rem;
+        border-radius: 0.7rem;
         border: none;
         background-color: rgb(129, 168, 253);
       }
     }
   }
   .comments {
-    border-top: 2px solid rgb(59, 55, 55);
+    border-top: 2px solid #DDD;
     ul {
       list-style: none;
       min-width: 28rem;
@@ -90,8 +95,8 @@
         }
         main {
           // border: 1px solid green;
-          border-top: 1px dotted #DDD;
-          border-bottom: 1px dotted #DDD;
+          border-top: 1px dotted #ddd;
+          border-bottom: 1px dotted #ddd;
           text-align: left;
           text-indent: 2rem;
         }

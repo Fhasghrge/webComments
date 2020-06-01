@@ -136,6 +136,7 @@ class deepArticle extends React.Component {
           </div>
         </div>
         <div className={`commentInput ${this.state.showComInput? '':'hide'}` }>
+          <div className='title'>COMMENT</div>
           <TextArea
             value={this.state.commentValue}
             onChange={this.onChange}
@@ -144,7 +145,7 @@ class deepArticle extends React.Component {
             autoSize={{ minRows: 1, maxRows: 5 }}
           />
           <div className="btns">
-            <button onClick={this.postComment}>发表</button>
+            <button onClick={this.postComment}>PUBLISH</button>
           </div>
         </div>
         <div className="comments">

@@ -15,7 +15,6 @@ html {
       text-align: center;
       font-size: 1rem;
       line-height: 5rem;
-
       font-weight: bold;
     }
     ul {
@@ -66,9 +65,10 @@ html {
       }
     }
   }
-  main {
+  & > main {
     // background-color: rgb(237, 240, 241);
     flex: 4;
+    overflow-y: scroll;
     height: 100vh;
   }
 }

@@ -36,8 +36,8 @@ app.post('/userinfos', bodyParser.json(), async (req, res) => {
 })
 
 app.post('/addArticles', upload.array(), async (req, res) => {
-  const { content, author, type } = req.body
-  const strSql = `INSERT INTO articles (content,author,type) VALUES ("${content}","${author}","${type}")`
+  const { content, author, type, title } = req.body
+  const strSql = `INSERT INTO articles (content,author,type,title) VALUES ("${content}","${author}","${type}","${title}")`
   const result = await sqlQuery(strSql)
   res.json({
     errcode: result.warningCount === 0 ? 0 : 1,
@@ -45,21 +45,21 @@ app.post('/addArticles', upload.array(), async (req, res) => {
 })
 
 app.post('/getArticles', upload.array(), async (req, res) => {
-  const {author, type } = req.body
+  const { author, type } = req.body
   const strSql = `SELECT title, id FROM articles WHERE author = "${author}" AND type = "${type}"`
   const result = await sqlQuery(strSql)
   res.json(Array.from(result))
 })
 
 app.post('/getDeepArticle', upload.array(), async (req, res) => {
-  const {id} = req.body
+  const { id } = req.body
   const strSql = `SELECT * FROM articles WHERE id = "${id}"`
   const result = await sqlQuery(strSql)
   res.json(Array.from(result))
 })
 
 app.post('/postComment', upload.array(), async (req, res) => {
-  const {author, content, article} = req.body
+  const { author, content, article } = req.body
   const data = new Date().toLocaleString()
   const strSql = `INSERT INTO comments (author,content,data,article) VALUES ("${author}","${content}","${data}","${article}")`
   const result = await sqlQuery(strSql)
@@ -69,14 +69,14 @@ app.post('/postComment', upload.array(), async (req, res) => {
 })
 
 app.post('/getComments', upload.array(), async (req, res) => {
-  const {article} = req.body
+  const { article } = req.body
   const strSql = `SELECT * FROM comments WHERE article = "${article}"`
   const result = await sqlQuery(strSql)
   res.json(Array.from(result))
 })
 
 app.post('/deleteComments', upload.array(), async (req, res) => {
-  const {id} = req.body
+  const { id } = req.body
   const strSql = `DELETE FROM comments WHERE id="${id}"`
   const result = await sqlQuery(strSql)
   res.json({
