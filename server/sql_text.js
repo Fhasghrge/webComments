@@ -1,3 +1,4 @@
+// 进行创建数据库的操作
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
