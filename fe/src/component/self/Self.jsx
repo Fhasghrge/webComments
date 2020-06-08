@@ -17,25 +17,34 @@ class Self extends React.Component {
     };
   }
   enterLoading = () => {
-    this.setState({ loading: true });
-    let formdata = new FormData();
-    formdata.set('content', this.state.cnt)
-    formdata.set('author', this.props.name)
-    formdata.set('type', this.state.type)
-    formdata.set('title', this.state.title)
-    axios({
-      method:'post',
-      url:'/addArticles',
-      data: formdata,
-      headers: { 'Content-Type': 'multipart/form-data' }
-    })
-      .then(res => {
-        if(res.data.errcode === 0) {
-          alert('提交成功！')
-        }else {
-          alert('提交失败')
-        }
+    if(this.state.cnt && this.state.type && this.state.title){
+      this.setState({ loading: true });
+      let formdata = new FormData();
+      formdata.set('content', this.state.cnt)
+      formdata.set('author', this.props.name)
+      formdata.set('type', this.state.type)
+      formdata.set('title', this.state.title)
+      axios({
+        method:'post',
+        url:'/addArticles',
+        data: formdata,
+        headers: { 'Content-Type': 'multipart/form-data' }
       })
+        .then(res => {
+          if(res.data.errcode === 0) {
+            this.setState({
+              type: '',
+              cnt: '',
+              title: ''
+            })
+            alert('提交成功！')
+          }else {
+            alert('提交失败')
+          }
+        })
+    }else {
+      alert('请不要提交空的')
+    }
     setTimeout(() => {
       this.setState({ loading: false });
     }, 2000);

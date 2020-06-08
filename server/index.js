@@ -84,6 +84,15 @@ app.post('/deleteComments', upload.array(), async (req, res) => {
   })
 })
 
+app.post('/changeComments', upload.array(), async (req, res) => {
+  const { id,comment } = req.body
+  const strSql = `UPDATE comments SET content="${comment}" WHERE id="${id}"`
+  const result = await sqlQuery(strSql)
+  res.json({
+    errcode: result.warningCount === 0 ? 0 : 1,
+  })
+})
+
 
 app.listen('8080', () => {
   console.log(

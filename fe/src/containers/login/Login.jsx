@@ -88,16 +88,6 @@ class Login extends React.Component {
             />
           </Form.Item>
           <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-
-            <a className="login-form-forgot" href="/forgetPasswd">
-              Forgot password
-            </a>
-          </Form.Item>
-
-          <Form.Item>
             <Button
               type="primary"
               htmlType="submit"
@@ -105,7 +95,6 @@ class Login extends React.Component {
             >
               LOG IN
             </Button>
-            Or <a href="/sign">register? now!</a>
           </Form.Item>
         </Form>
       </div>

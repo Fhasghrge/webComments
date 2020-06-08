@@ -22,6 +22,9 @@ class deepArticle extends React.Component {
       title: '',
       commentValue: '',
       showComInput: false,
+      showChange: false,
+      changeId: 0,
+      changeComment: '',
       comments: [],
     };
   }
@@ -48,10 +51,10 @@ class deepArticle extends React.Component {
     });
   }
   showInput = () => {
-    this.setState(preProps => ({
-      showComInput: !preProps.showComInput
-    }))
-  }
+    this.setState((preProps) => ({
+      showComInput: !preProps.showComInput,
+    }));
+  };
   onChange = ({ target: { value } }) => {
     this.setState({ commentValue: value });
   };
@@ -66,20 +69,20 @@ class deepArticle extends React.Component {
       data: formdata,
       headers: { 'Content-Type': 'multipart/form-data' },
     })
-      .then(res => {
-        if(res.data.errcode === 0) {
+      .then((res) => {
+        if (res.data.errcode === 0) {
           this.setState({
-            commentValue: ''
-          })
-          this.showComments()
-        }else {
-          alert('评论失败')
+            commentValue: '',
+          });
+          this.showComments();
+        } else {
+          alert('评论失败');
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
   showComments = () => {
     let formdata = new FormData();
     formdata.set('article', this.state.id);
@@ -89,15 +92,15 @@ class deepArticle extends React.Component {
       data: formdata,
       headers: { 'Content-Type': 'multipart/form-data' },
     })
-      .then(res => {
+      .then((res) => {
         this.setState({
-          comments: res.data
-        })
+          comments: res.data,
+        });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
   deleteComment(id) {
     let formdata = new FormData();
     formdata.set('id', id);
@@ -107,17 +110,54 @@ class deepArticle extends React.Component {
       data: formdata,
       headers: { 'Content-Type': 'multipart/form-data' },
     })
-      .then(res => {
-        if(res.data.errcode === 0) {
-          this.showComments()
-        }else {
-          alert('删除失败')
+      .then((res) => {
+        if (res.data.errcode === 0) {
+          this.showComments();
+        } else {
+          alert('删除失败');
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
+      });
   }
+  changeComment(id) {
+    this.setState({
+      showChange: true,
+      changeId: id,
+    });
+  }
+  postChange = () => {
+    let formdata = new FormData();
+    formdata.set('id', this.state.changeId);
+    formdata.set('comment', this.state.changeComment);
+    axios({
+      method: 'POST',
+      url: '/changeComments',
+      data: formdata,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+      .then((res) => {
+        if (res.data.errcode === 0) {
+          this.setState({
+            showChange: false,
+          });
+          setTimeout(() => {
+            this.showComments();
+          }, 500);
+        } else {
+          alert('改变失败');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  setChange = (e) => {
+    this.setState({
+      changeComment: e.target.value,
+    });
+  };
   render() {
     return (
       <div className="detail">
@@ -135,8 +175,10 @@ class deepArticle extends React.Component {
             </div>
           </div>
         </div>
-        <div className={`commentInput ${this.state.showComInput? '':'hide'}` }>
-          <div className='title'>COMMENT</div>
+        <div
+          className={`commentInput ${this.state.showComInput ? '' : 'hide'}`}
+        >
+          <div className="title">COMMENT</div>
           <TextArea
             value={this.state.commentValue}
             onChange={this.onChange}
@@ -148,15 +190,31 @@ class deepArticle extends React.Component {
             <button onClick={this.postComment}>PUBLISH</button>
           </div>
         </div>
+        <div
+          className={`changeComments ${this.state.showChange ? '' : 'hide'}`}
+        >
+          <input onChange={this.setChange} type="text" name="cnt" id="cnt" />
+          <button onClick={this.postChange}>Change</button>
+        </div>
         <div className="comments">
           <ul>
             {this.state.comments.map((item) => (
               <li key={item.id}>
                 <header>
-                  <div className="name">{this.props.name === item.author? 'YouSelf': item.author}</div>
-                  <div className={`btns ${this.props.name === item.author? '': 'hide'}`}>
-                    <button onClick={this.deleteComment.bind(this, item.id)}>Delete</button>
-                    <button>Change</button>
+                  <div className="name">
+                    {this.props.name === item.author ? 'YouSelf' : item.author}
+                  </div>
+                  <div
+                    className={`btns ${
+                      this.props.name === item.author ? '' : 'hide'
+                    }`}
+                  >
+                    <button onClick={this.deleteComment.bind(this, item.id)}>
+                      Delete
+                    </button>
+                    <button onClick={this.changeComment.bind(this, item.id)}>
+                      Change
+                    </button>
                   </div>
                 </header>
                 <main>{item.content}</main>
