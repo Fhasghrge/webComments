@@ -9,7 +9,7 @@ app.use(router) // 把路由挂载到服务器
 
 app.listen('8080', () => {
   console.log(
-    'server Start',
-    'http:localhost:8080/'
+    'server Start:',
+    '\nhttp://localhost:8080'
   )
 })
