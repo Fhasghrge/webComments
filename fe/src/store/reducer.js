@@ -3,14 +3,17 @@
 const initData = {
   name: 'shuang',
   login: false,
-  contents: [
+  contents: [ // 菜单导航
     'self',
     'fe',
     'be',
     'alg',
     'others'
   ],
-  articleId: 0
+  /**
+   * 保存打开文章详情页面时文章标识
+   */
+  articleId: 0 
 }
 
 const reducer = (state = initData, action) => {

@@ -33,8 +33,9 @@ class Be extends React.Component {
         <ul>
           {this.state.articles.map((item, index) => (
             <Link key={item.id} to={'/detail?id='+ item.id }>
-              <span>{index + 1}</span>
-              <p>{item.title}</p>
+              {/* <span>{index + 1}</span> */}
+              <p>标题：{item.title}</p>
+              <span>作者：{item.author}</span>
             </Link>
           ))}
         </ul>

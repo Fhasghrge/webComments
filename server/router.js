@@ -20,7 +20,7 @@ router.post('/userinfos', bodyParser.json(), async (req, res) => {
     if (resdata.length === 1) {
       res.json({
         errcode: 0,
-        types: resdata[0].contents
+        types: resdata[0].contents // 返回用户信息
       })
     } else {
       res.json({
@@ -42,8 +42,8 @@ router.post('/addArticles', upload.array(), async (req, res) => {
 })
 
 router.post('/getArticles', upload.array(), async (req, res) => {
-  const { author, type } = req.body
-  const strSql = `SELECT title, id FROM articles WHERE author = "${author}" AND type = "${type}"`
+  const {type } = req.body
+  const strSql = `SELECT title, author, id FROM articles WHERE type = "${type}"`
   const result = await sqlQuery(strSql)
   res.json(Array.from(result))
 })

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { deepArticle } from '../../store/action';
 import '../../assets/style/articles.scss';
 class others extends React.Component {
@@ -32,9 +32,9 @@ class others extends React.Component {
       <div className="others">
         <ul>
           {this.state.articles.map((item, index) => (
-            <Link key={item.id} to={'/detail?id='+ item.id }>
-              <span>{index + 1}</span>
-              <p>{item.title}</p>
+            <Link key={item.id} to={'/detail?id=' + item.id}>
+              <p>标题：{item.title}</p>
+              <span>作者：{item.author}</span>
             </Link>
           ))}
         </ul>

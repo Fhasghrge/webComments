@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios'
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
 import {connect} from 'react-redux';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {login as actionLogin} from '../../store/action'
