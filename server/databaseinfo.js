@@ -1,8 +1,8 @@
 const databaseinfo = {
-  host: "localhost",
+  host: "172.24.26.9",
   user: "root",
-  post: '3036',
-  password: "zs123456",
+  // post: '3306',
+  password: "Shuang@220",
   database: 'mydb'
 }
 module.exports =  databaseinfo

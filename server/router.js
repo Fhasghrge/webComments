@@ -2,11 +2,16 @@
 // 用来根据不同的请求方法和请求路径设置具体的函数
 const express = require('express')
 const router = express.Router() // 获取路由对象
+
 const sqlQuery = require('./sql')
 const multer = require('multer')
 const upload = multer()
 const bodyParser = require('body-parser')
 
+/**
+ * * 路由层中间件
+ * * 使用router.use || router.METHOD
+ */
 router.post('/userinfos', bodyParser.json(), async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
